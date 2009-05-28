@@ -16,12 +16,15 @@
 
         (cond
          ((list? (car it-list))
-          (map (lambda (it-pair) (run-example describe-name it-pair))
-               it-list))
+          (run-example-group describe-name it-list))
          (else
-          (run (list
-                describe-name 
-                (list it-list))))))))
+          (run-example-group describe-name (list it-list)))))))
+    
+  (define run-example-group
+    (lambda (describe-name it-list)
+      (map (lambda (it-pair)
+             (run-example describe-name it-pair))
+           it-list)))
 
   (define run-example
     (lambda (description-name it-pair)
