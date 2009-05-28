@@ -1,5 +1,4 @@
 (module mzspec scheme
-  
   (define-syntax describe
     (syntax-rules ()
       ((_ string . body)
@@ -13,7 +12,7 @@
   (define run
     (lambda (pair)
       (let ((describe-name (car pair))
-            (it-list       (cadr pair)))
+            (it-list       (cdr pair)))
 
         (cond
          ((list? (car it-list))
