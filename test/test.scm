@@ -55,47 +55,47 @@
  #f)
 
 
-;; describe "the runner"
-"runs an it inside the block"
+;; describe "the collect-resultsner"
+"collect-resultss an it inside the block"
 (define called #f)
-(run
+(collect-results
  (describe "subject"
-   (it "should run the block"
+   (it "should collect-results the block"
      (set! called #t))))
 
 (check-equal? called #t)
 
 "returns a pair of (#t, description + string) when true"
 (check-equal?
- (run
+ (collect-results
   (describe "foo"
     (it "bar" (eq? #t #t))))
  (list #t "foo bar"))
    
 "returns the correct return value"
 (check-equal?
- (run
+ (collect-results
   (describe "foo"
     (it "bar" (eq? #t #f))))
  (list #f "foo bar"))
 
 "uses the correct description string"
 (check-equal?
- (run
+ (collect-results
   (describe "describe string"
     (it "bar" (eq? #t #t))))
  (list #t "describe string bar"))
 
 "uses the correct example name"
 (check-equal?
- (run
+ (collect-results
   (describe "describe string"
     (it "example name" (eq? #t #t))))
  (list #t "describe string example name"))
 
 "should handle multiple examples under the same describe"
 (check-equal?
- (run
+ (collect-results
   (describe "describe"
     (it "should have a first example" (eq? #t #t))
     (it "should have a second example" (eq? #t #t))))
@@ -107,7 +107,7 @@
 
 "should handle multiple describe blocks"
 (check-equal?
- (run
+ (collect-results
   (describe "describe1"
     (it "should have a first example" (eq? #t #t)))
   (describe "describe2"

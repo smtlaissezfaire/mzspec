@@ -7,7 +7,7 @@
       ((_ str body)
        (list str (lambda () body)))))
 
-  (define (run . blocks)
+  (define (collect-results . blocks)
     (flatten (run-multiple-blocks blocks)))
 
   (define run-multiple-blocks
@@ -40,5 +40,5 @@
                 " "
                 example-name)))))
 
-  (provide describe it run)
+  (provide describe it collect-results)
 )
