@@ -1,8 +1,6 @@
 (module mzspec scheme
-  (define-syntax describe
-    (syntax-rules ()
-      ((_ string . body)
-       (list string . body))))
+  (define (describe string . body)
+    (cons string body))
 
   (define-syntax it
     (syntax-rules ()
