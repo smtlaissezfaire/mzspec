@@ -9,9 +9,17 @@
       ((_ str body)
        (list str (lambda () body)))))
 
-  (define run
-    (lambda (block)
-      (run-describe-block block)))
+  (define (run . blocks)
+    (flatten (run-multiple-blocks blocks)))
+
+  (define run-multiple-blocks
+    (lambda (blocks)
+      (cond
+       ((empty? blocks) '())
+       (else
+        (cons
+         (run-describe-block (car blocks))
+         (run-multiple-blocks (cdr blocks)))))))
 
   (define (run-describe-block describe-block)
     (let ((describe-name (car describe-block))

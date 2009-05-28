@@ -63,37 +63,35 @@
    (it "should run the block"
      (set! called #t))))
 
-(check-equal? 
- called
- #t)
+(check-equal? called #t)
 
-"returns a pair of ((#t, description + string)) when true"
+"returns a pair of (#t, description + string) when true"
 (check-equal?
  (run
   (describe "foo"
     (it "bar" (eq? #t #t))))
- (list (list #t "foo bar")))
+ (list #t "foo bar"))
    
 "returns the correct return value"
 (check-equal?
  (run
   (describe "foo"
     (it "bar" (eq? #t #f))))
- (list (list #f "foo bar")))
+ (list #f "foo bar"))
 
 "uses the correct description string"
 (check-equal?
  (run
   (describe "describe string"
     (it "bar" (eq? #t #t))))
- (list (list #t "describe string bar")))
+ (list #t "describe string bar"))
 
 "uses the correct example name"
 (check-equal?
  (run
   (describe "describe string"
     (it "example name" (eq? #t #t))))
- (list (list #t "describe string example name")))
+ (list #t "describe string example name"))
 
 "should handle multiple examples under the same describe"
 (check-equal?
@@ -101,8 +99,24 @@
   (describe "describe"
     (it "should have a first example" (eq? #t #t))
     (it "should have a second example" (eq? #t #t))))
+  (list
+   #t
+   "describe should have a first example"
+   #t
+   "describe should have a second example"))
+
+"should handle multiple describe blocks"
+(check-equal?
+ (run
+  (describe "describe1"
+    (it "should have a first example" (eq? #t #t)))
+  (describe "describe2"
+    (it "should have a second example" (eq? #t #t))))
+
  (list
-  (list #t "describe should have a first example")
-  (list #t "describe should have a second example")))
+  #t
+  "describe1 should have a first example"
+  #t
+  "describe2 should have a second example"))
   
 )
