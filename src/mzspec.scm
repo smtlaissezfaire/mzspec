@@ -9,16 +9,10 @@
       ((_ str body)
        (list str (lambda () body)))))
 
-  (define run
-    (lambda (pair)
-      (let ((describe-name (car pair))
-            (it-list       (cdr pair)))
-
-        (cond
-         ((list? (car it-list))
-          (run-example-group describe-name it-list))
-         (else
-          (run-example-group describe-name (list it-list)))))))
+  (define (run describe-block)
+    (let ((describe-name (car describe-block))
+          (it-list (cdr describe-block)))
+      (run-example-group describe-name it-list)))
     
   (define run-example-group
     (lambda (describe-name it-list)
