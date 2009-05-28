@@ -9,7 +9,11 @@
       ((_ str body)
        (list str (lambda () body)))))
 
-  (define (run describe-block)
+  (define run
+    (lambda (block)
+      (run-describe-block block)))
+
+  (define (run-describe-block describe-block)
     (let ((describe-name (car describe-block))
           (it-list (cdr describe-block)))
       (run-example-group describe-name it-list)))
