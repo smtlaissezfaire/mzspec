@@ -7,6 +7,15 @@
       ((_ str body)
        (list str (lambda () body)))))
 
+  (define passed-example-counts
+    (lambda (lst)
+      (cond
+       ((empty? lst) 0)
+       ((eq? (car lst) #t)
+        (+ 1 (passed-example-counts (cdr lst))))
+       (else
+        (passed-example-counts (cdr lst))))))
+
   (define (collect-results . blocks)
     (flatten (run-multiple-blocks blocks)))
 
@@ -40,5 +49,5 @@
                 " "
                 example-name)))))
 
-  (provide describe it collect-results)
+  (provide describe it collect-results passed-example-counts)
 )

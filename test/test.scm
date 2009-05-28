@@ -118,5 +118,33 @@
   "describe1 should have a first example"
   #t
   "describe2 should have a second example"))
+
+;; printing results
+
+;; passes
+"should report the # of passes"
+(check-equal?
+  (passed-example-counts
+   (collect-results
+    (describe "foo"
+      (it "should pass" (eq? #t #t)))))
+  1)
+
+"should report the correct # of passes"
+(check-equal?
+  (passed-example-counts
+   (collect-results
+    (describe "foo"
+      (it "should pass" (eq? #t #t))
+      (it "should pass" (eq? #t #t)))))
+  2)
+
+"should report 0 passes with one failure, and 0 passes"
+(check-equal?
+  (passed-example-counts
+   (collect-results
+    (describe "foo"
+      (it "should fail" (eq? #t #f)))))
+  0)
   
 )
