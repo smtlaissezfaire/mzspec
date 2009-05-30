@@ -1,4 +1,6 @@
 (module mzspec scheme
+  (require "pluralization.scm")
+
   (define (describe string . body)
     (cons string body))
 
@@ -32,12 +34,6 @@
                    ", "
                    (pluralize failed-counts "failure")))))
 
-  (define pluralize
-    (lambda (num name)
-      (cond
-       ((eq? num 1) (string-append "1 " name))
-       (else
-        (string-append (number->string num) " " name "s")))))
 
   (define (collect-results . blocks)
     (flatten (run-multiple-blocks blocks)))
