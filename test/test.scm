@@ -167,8 +167,8 @@
  2)
 
 ;; printing results
-(define (mock-print . x)
-  (apply string-append x))
+(define mock-print
+  (lambda (arg) arg))
 
 "should print '0 examples, 0 failures'"
 (check-equal?
