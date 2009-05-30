@@ -1,0 +1,7 @@
+#!/usr/bin/env mzscheme
+#lang scheme/base
+
+(require "../src/mzspec.scm")
+(mzscheme-run-files
+  (vector->list (current-command-line-arguments)))
+  
