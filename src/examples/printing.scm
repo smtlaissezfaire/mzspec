@@ -1,6 +1,6 @@
-(module example-printing scheme
+(module printing scheme
   (require "pluralization.scm")
-  (require "example-counting.scm")
+  (require "counting.scm")
 
   (define print-examples
     (lambda (results print-fun)

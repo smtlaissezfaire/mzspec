@@ -1,4 +1,4 @@
-(module example-counting scheme
+(module counting scheme
   (define passed-example-counts
     (lambda (lst)
       (sum-example-counts lst #t)))

@@ -1,4 +1,4 @@
-(module example-running scheme
+(module running scheme
   (define run-multiple-blocks
     (lambda (blocks)
       (cond

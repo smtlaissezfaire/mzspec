@@ -1,7 +1,7 @@
 (module mzspec scheme
-  (require "example-counting.scm")
-  (require "example-running.scm")
-  (require "example-printing.scm")
+  (require "examples/counting.scm")
+  (require "examples/running.scm")
+  (require "examples/printing.scm")
   (require "dsl.scm")
 
   (provide describe
