@@ -9,12 +9,35 @@
 
   (define passed-example-counts
     (lambda (lst)
+      (sum-example-counts lst #t)))
+
+  (define failed-example-counts
+    (lambda (lst)
+      (sum-example-counts lst #f)))
+
+  (define sum-example-counts
+    (lambda (lst match-value)
       (cond
        ((empty? lst) 0)
-       ((eq? (car lst) #t)
-        (+ 1 (passed-example-counts (cdr lst))))
+       ((eq? (car lst) match-value)
+        (+ 1 (sum-example-counts (cdr lst) match-value)))
        (else
-        (passed-example-counts (cdr lst))))))
+        (sum-example-counts (cdr lst) match-value)))))
+
+  (define print-examples
+    (lambda (results print-fun)
+      (let ((passed-counts (passed-example-counts results))
+            (failed-counts (failed-example-counts results)))
+        (print-fun (pluralize (+ passed-counts failed-counts) "example")
+                   ", "
+                   (pluralize failed-counts "failure")))))
+
+  (define pluralize
+    (lambda (num name)
+      (cond
+       ((eq? num 1) (string-append "1 " name))
+       (else
+        (string-append (number->string num) " " name "s")))))
 
   (define (collect-results . blocks)
     (flatten (run-multiple-blocks blocks)))
@@ -49,5 +72,10 @@
                 " "
                 example-name)))))
 
-  (provide describe it collect-results passed-example-counts)
+  (provide describe
+           it
+           collect-results
+           passed-example-counts
+           failed-example-counts
+           print-examples)
 )

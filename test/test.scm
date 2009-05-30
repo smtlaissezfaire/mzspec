@@ -146,5 +146,77 @@
     (describe "foo"
       (it "should fail" (eq? #t #f)))))
   0)
-  
+
+
+;; failures
+"should report 1 failure"
+(check-equal?
+ (failed-example-counts
+  (collect-results
+   (describe "foo"
+     (it "should fail" (eq? #t #f)))))
+ 1)
+
+"should report the correct # of failures"
+(check-equal?
+ (failed-example-counts
+  (collect-results
+   (describe "foo"
+     (it "should fail - 1" (eq? #t #f))
+     (it "should fail - 1" (eq? #t #f)))))
+ 2)
+
+;; printing results
+(define (mock-print . x)
+  (apply string-append x))
+
+"should print '0 examples, 0 failures'"
+(check-equal?
+ (print-examples
+  (collect-results (describe "foo"))
+  mock-print)
+ "0 examples, 0 failures")
+
+"should print '1 example, 0 failures'"
+(check-equal?
+ (print-examples
+  (collect-results
+   (describe "foo"
+     (it "should be true" (eq? #t #t))))
+  mock-print)
+ "1 example, 0 failures")
+
+"should print '2 example, 0 failures'"
+(check-equal?
+ (print-examples
+  (collect-results
+   (describe "foo"
+     (it "should be true" (eq? #t #t))
+     (it "should be true" (eq? #t #t))))
+  mock-print)
+ "2 examples, 0 failures")
+
+"should print '2 examples, 2 failures'"
+(check-equal?
+ (print-examples
+  (collect-results
+   (describe "foo"
+     (it "should be false"
+       (eq? #f #t))
+     (it "should also be false"
+       (eq? #f #t))))
+  mock-print)
+ 
+ "2 examples, 2 failures")
+
+"should print '1 example, 1 failure'"
+(check-equal?
+ (print-examples
+  (collect-results
+   (describe "foo"
+     (it "should be false"
+       (eq? #f #t))))
+  mock-print)
+ "1 example, 1 failure")
+ 
 )
