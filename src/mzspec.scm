@@ -1,13 +1,6 @@
 (module mzspec scheme
   (require "pluralization.scm")
-
-  (define (describe string . body)
-    (cons string body))
-
-  (define-syntax it
-    (syntax-rules ()
-      ((_ str body)
-       (list str (lambda () body)))))
+  (require "dsl.scm")
 
   (define passed-example-counts
     (lambda (lst)
