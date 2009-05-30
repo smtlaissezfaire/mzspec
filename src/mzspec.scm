@@ -12,11 +12,6 @@
                    ", "
                    (pluralize failed-counts "failure")))))
 
-
-  (define (collect-results . blocks)
-    (flatten (run-multiple-blocks blocks)))
-
-
   (provide describe
            it
            collect-results

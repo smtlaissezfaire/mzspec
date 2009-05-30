@@ -29,5 +29,9 @@
                 " "
                 example-name)))))
 
-  (provide run-multiple-blocks)
+  (define (collect-results . blocks)
+    (flatten (run-multiple-blocks blocks)))
+
+  (provide run-multiple-blocks
+           collect-results)
 )
