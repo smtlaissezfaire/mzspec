@@ -3,7 +3,7 @@
   (require "counting.scm")
 
   (define print-examples
-    (lambda (results print-fun)
+    (lambda (results [print-fun default-print-function])
       (let ((passed-counts (passed-example-counts results))
             (failed-counts (failed-example-counts results)))
         (print-fun
@@ -12,6 +12,8 @@
           ", "
           (pluralize failed-counts "failure"))))))
 
-  (provide print-examples)
+  (define default-print-function print)
+
+  (provide print-examples default-print-function)
 )
 
