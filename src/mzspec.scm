@@ -1,5 +1,4 @@
 (module mzspec scheme
-  (require "pluralization.scm")
   (require "example-counting.scm")
   (require "example-running.scm")
   (require "example-printing.scm")
